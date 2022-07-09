@@ -10,17 +10,20 @@
 #include <algorithm>
 #include <iomanip>
 
-const int FieldSize = 16;
-const int RowSize = 4;
+constexpr int FieldSize = 16;
+constexpr int RowSize = 4;
+
 using array_b = std::array<char, FieldSize>;
 using array_hb = std::array<char, FieldSize / 2>;
 
-const array_b FinishField = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
+constexpr array_b FinishField = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
 
 class Field
 {
 public:
     explicit Field(array_b const &);
+    Field(Field const &other) = default;
+    Field &operator=(Field const &other) = default;
     
     bool operator==(Field const &) const;
     bool operator!=(Field const &) const;
@@ -124,6 +127,8 @@ class GameState
 {
 public:
     explicit GameState(array_b const &);
+    GameState(GameState const &other) = default;
+    GameState &operator=(GameState const &other) = default;
 
     bool CanMoveLeft() const;
     bool CanMoveUp() const;
@@ -148,18 +153,18 @@ public:
     friend std::ostream &operator <<(std::ostream &out, GameState &gState);
     friend Hasher;
 private:
-    Field field;
+    Field field16;
     char posZero;
 };
 
 GameState::GameState(const array_b &_field) :
-    field(_field),
+    field16(_field),
     posZero(-1)
 {
     std::set<int> digits(FinishField.begin(), FinishField.end());
-    for (size_t i = 0; i < field.size(); ++i)
+    for (size_t i = 0; i < field16.size(); ++i)
     {
-        auto it = digits.find(field[i]);
+        auto it = digits.find(field16[i]);
         if (it != digits.end())
         {
             digits.erase(it);
@@ -167,15 +172,14 @@ GameState::GameState(const array_b &_field) :
     }  
     assert(digits.empty());
     
-    for (size_t i = 0; i < field.size(); ++i)
+    for (size_t i = 0; i < field16.size(); ++i)
     {
-        if (field[i] == 0)
+        if (field16[i] == 0)
         {
             posZero = i;
             break;
         }
     }
-    // posZero = static_cast<int>(std::distance(field.begin(), std::find(field.begin(), field.end(), 0)));
 }
 
 bool GameState::operator!=(const GameState &other) const
@@ -185,12 +189,12 @@ bool GameState::operator!=(const GameState &other) const
 
 bool GameState::operator==(const GameState &other) const
 {
-    return field == other.field;
+    return field16 == other.field16;
 } 
 
 bool GameState::IsFinish() const
 {
-    return field == FinishField;
+    return field16 == FinishField;
 }
 
 bool GameState::CanMoveLeft() const
@@ -216,11 +220,10 @@ bool GameState::CanMoveDown() const
 bool GameState::HasSolution() const
 {
     int count = 0;
-    // std::vector<char> vec(field.begin(), field.end());
     std::vector<char> vec;
-    for (size_t i = 0; i < field.size(); ++i)
+    for (size_t i = 0; i < field16.size(); ++i)
     {
-        vec.push_back(field[i]);
+        vec.push_back(field16[i]);
     }
     vec.erase(std::find(vec.begin(), vec.end(), 0));
     for (size_t i = 0; i < vec.size(); ++i)
@@ -243,7 +246,7 @@ bool GameState::HasSolution() const
 void GameState::Swap(int l, int r) 
 {
     assert(l >= 0 && l < FieldSize && r >= 0 && r < FieldSize);
-    field.Swap(l, r);
+    field16.Swap(l, r);
 }
 
 GameState GameState::MoveLeft() const
@@ -295,9 +298,9 @@ char GameState::ManhattanDistance(char val, size_t pos) const
 char GameState::Heuristic() const
 {
     char sum = 0;
-    for (size_t i = 0; i < field.size(); ++i)
+    for (size_t i = 0; i < field16.size(); ++i)
     {
-        sum += ManhattanDistance(field[i], i);
+        sum += ManhattanDistance(field16[i], i);
     }
     return sum;
 }
@@ -308,7 +311,7 @@ public:
     std::size_t operator()(GameState const &gState) const
     {
         std::size_t hash = 0;
-        memcpy(&hash, &gState.field.rowAt(0), sizeof(hash));
+        memcpy(&hash, &gState.field16.rowAt(0), sizeof(hash));
         return hash;
     }
 };
@@ -434,7 +437,7 @@ std::ostream &operator <<(std::ostream &out, GameState &gState)
     {
         for (size_t j = 0; j < RowSize; ++j)
         {
-            out << std::setw(3) << static_cast<int>(gState.field[i * RowSize + j]) << " ";
+            out << std::setw(3) << static_cast<int>(gState.field16[i * RowSize + j]) << " ";
         }
         out << std::endl;
     }

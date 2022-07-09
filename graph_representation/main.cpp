@@ -3,6 +3,7 @@
 #include <vector>
 #include <iterator>
 #include <queue>
+#include <limits>
 
 #include "ListGraph.h"
 #include "MatrixGraph.h"
@@ -101,6 +102,39 @@ std::deque<int> topologicalSort(const IGraph &graph)
     return sorted; 
 }
 
+int FindRoute(const IGraph &graph, int s, int t)
+{
+    std::vector<int> routes(graph.VerticesCount(), std::numeric_limits<int>::max() - 1);
+    std::vector<int> k(graph.VerticesCount(), 0);
+    k[s] = 1;
+    std::queue<int> q;
+    q.push(s);
+    routes[s] = 0;
+    while (!q.empty())
+    {
+        int currentVertex = q.front();
+        q.pop();
+        for (int nextVertex : graph.GetNextVertices(currentVertex))
+        {
+            if (routes[nextVertex] > routes[currentVertex] + 1)
+            {
+                std::cout << ">" << currentVertex << " " << k[currentVertex] << "|" << nextVertex << " " << k[nextVertex] << std::endl;
+                routes[nextVertex] = routes[currentVertex] + 1;
+                k[nextVertex] = k[currentVertex];
+                q.push(nextVertex);
+            }
+            else if (routes[nextVertex] == routes[currentVertex] + 1)
+            {
+                std::cout << "=" << currentVertex << " " << k[currentVertex] << "|" << nextVertex <<" " <<  k[nextVertex] << std::endl;
+                k[nextVertex] += k[currentVertex];
+            }
+
+        }
+    }
+    // std::copy(k.begin(), k.end(), std::ostream_iterator<int>(std::cout, " "));
+    return k[t];
+}
+
 void showGraph(const IGraph &graph)
 {
     // VerticesCount + GetNextVertices
@@ -108,26 +142,51 @@ void showGraph(const IGraph &graph)
     std::cout << std::endl;
 
     // GetPrevVertices(4)
-    std::vector<int> prevVertices = graph.GetPrevVertices(4);
+    std::vector<int> prevVertices = graph.GetPrevVertices(3);
     std::copy(prevVertices.begin(), prevVertices.end(), std::ostream_iterator<int>(std::cout, " "));
 }
 
 int main(int argc, const char *argv[])
 {
-    ListGraph listGraph(7);
+    ListGraph listGraph(4);
+
+    // listGraph.AddEdge(0, 1);
+    // listGraph.AddEdge(0, 5);
+    // listGraph.AddEdge(1, 2);
+    // listGraph.AddEdge(1, 3);
+    // listGraph.AddEdge(1, 5);
+    // listGraph.AddEdge(1, 6);
+    // listGraph.AddEdge(3, 2);
+    // listGraph.AddEdge(3, 4);
+    // listGraph.AddEdge(3, 6);
+    // listGraph.AddEdge(5, 4);
+    // listGraph.AddEdge(5, 6);
+    // listGraph.AddEdge(6, 4);
+
+    // listGraph.AddEdge(1, 0);
+    // listGraph.AddEdge(5, 0);
+    // listGraph.AddEdge(2, 1);
+    // listGraph.AddEdge(3, 1);
+    // listGraph.AddEdge(5, 1);
+    // listGraph.AddEdge(6, 1);
+    // listGraph.AddEdge(2, 3);
+    // listGraph.AddEdge(4, 3);
+    // listGraph.AddEdge(6, 3);
+    // listGraph.AddEdge(4, 5);
+    // listGraph.AddEdge(6, 5);
+    // listGraph.AddEdge(4, 6);
 
     listGraph.AddEdge(0, 1);
-    listGraph.AddEdge(0, 5);
+    listGraph.AddEdge(0, 2);
     listGraph.AddEdge(1, 2);
     listGraph.AddEdge(1, 3);
-    listGraph.AddEdge(1, 5);
-    listGraph.AddEdge(1, 6);
+    listGraph.AddEdge(2, 3);
+
+    listGraph.AddEdge(1, 0);
+    listGraph.AddEdge(2, 0);
+    listGraph.AddEdge(2, 1);
+    listGraph.AddEdge(3, 1);
     listGraph.AddEdge(3, 2);
-    listGraph.AddEdge(3, 4);
-    listGraph.AddEdge(3, 6);
-    listGraph.AddEdge(5, 4);
-    listGraph.AddEdge(5, 6);
-    listGraph.AddEdge(6, 4);
 
     std::cout << "\nListGraph" << std::endl;
     showGraph(listGraph);
@@ -149,4 +208,8 @@ int main(int argc, const char *argv[])
     ArcGraph arcGraph(setGraph);
 
     showGraph(arcGraph);
+
+    std::cout << std::endl;
+
+    std::cout << "k = " << FindRoute(arcGraph, 0, 3) << std::endl;
 }

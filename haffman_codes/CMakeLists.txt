@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.0.0)
+
+project(haffman_codes)
+
+file(GLOB SOURCES "*.cpp", "**/*.cpp")
+file(GLOB INCLUDE_DIRS include)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
+
+message("SOURCES = ${SOURCES}")

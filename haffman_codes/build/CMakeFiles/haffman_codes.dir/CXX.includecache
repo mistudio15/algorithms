@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/stream.h
+vector
+-
+string
+-
+
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/main.cpp
+iostream
+-
+stream.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream.h
+
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream/stream.cpp
+stream.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream/stream.h
+

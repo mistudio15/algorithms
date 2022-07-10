@@ -6,19 +6,27 @@
 
 #IncludeRegexTransform: 
 
+../include/bit_manager.h
+vector
+-
+optional
+-
+
 ../include/stream.h
 vector
 -
 string
 -
+cstdio
+-
 
 /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/main.cpp
 iostream
 -
+bitset
+-
 stream.h
 /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream.h
-
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream/stream.cpp
-stream.h
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream/stream.h
+bit_manager.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager.h
 

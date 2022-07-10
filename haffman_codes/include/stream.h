@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <cstdio>
 
 using byte = unsigned char;
 

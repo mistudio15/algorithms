@@ -38,23 +38,23 @@ bool BitManager::Read(byte &value, std::optional<size_t> n_bits, std::optional<s
         value |= data[index] & ((int)pow(2, 8 - rest) - 1);
         value <<= (*n_bits - (8 - rest));
         value |= (data[index + 1] >> (8 - rest));
-        cursor_read += *n_bits;
     }
     else
     {
         if (rest == 0)
         {
-            value |= data[index] & ((int)pow(2, *n_bits) - 1);
+            value |= (data[index] >> (8 - *n_bits)) & (((int)pow(2, *n_bits) - 1));
         }
         else
         {
-            value |= (data[index] >> (8 - rest)) & ((int)pow(2, *n_bits) - 1);
+            value |= (data[index] >> (8 - rest - *n_bits)) & ((int)pow(2, *n_bits) - 1);
         }
     }
+    cursor_read += *n_bits;
     return true;
 }
 
 bool BitManager::Write(byte value, std::optional<size_t> n_bits, std::optional<size_t> index_start)
 {
-
+    
 }

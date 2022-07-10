@@ -29,9 +29,12 @@ int main()
     }
     std::cout << std::endl;
     BitManager bit(vec);
-    byte v;
-    std::cout << bit.Read(v, 8, 14) << std::endl;
-    std::cout << std::bitset<8>(v) << std::endl;
+    byte v1;
+    byte v2;
+    std::cout << bit.Read(v1, 5) << std::endl;
+    std::cout << bit.Read(v2, 8) << std::endl;
+    std::cout << std::bitset<8>(v1) << std::endl;
+    std::cout << std::bitset<8>(v2) << std::endl;
 
     return 0;
 }

@@ -41,14 +41,8 @@ bool BitManager::Read(byte &value, std::optional<size_t> n_bits, std::optional<s
     }
     else
     {
-        if (rest == 0)
-        {
-            value |= (data[index] >> (8 - *n_bits)) & (((int)pow(2, *n_bits) - 1));
-        }
-        else
-        {
-            value |= (data[index] >> (8 - rest - *n_bits)) & ((int)pow(2, *n_bits) - 1);
-        }
+        int ones_n_bits = ((int)pow(2, *n_bits) - 1);
+        value |= (data[index] >> (8 - rest - *n_bits)) & (ones_n_bits);
     }
     cursor_read += *n_bits;
     return true;

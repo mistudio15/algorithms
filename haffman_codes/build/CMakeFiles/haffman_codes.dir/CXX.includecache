@@ -12,21 +12,13 @@ vector
 optional
 -
 
-../include/stream.h
-vector
--
-string
--
-cstdio
--
-
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/main.cpp
-iostream
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager/bit_manager.cpp
+cmath
 -
 bitset
 -
-stream.h
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream.h
+iostream
+-
 bit_manager.h
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager/bit_manager.h
 

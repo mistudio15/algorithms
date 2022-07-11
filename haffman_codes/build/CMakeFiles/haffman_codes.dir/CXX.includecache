@@ -12,13 +12,33 @@ vector
 optional
 -
 
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager/bit_manager.cpp
-cmath
+../include/data_manager.h
+vector
+-
+map
+-
+bit_manager.h
+../include/bit_manager.h
+
+../include/stream.h
+vector
+-
+string
+-
+cstdio
+-
+
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/main.cpp
+iostream
 -
 bitset
 -
-iostream
+string
 -
+stream.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/stream.h
 bit_manager.h
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager/bit_manager.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager.h
+data_manager.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager.h
 

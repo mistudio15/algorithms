@@ -67,7 +67,7 @@ bool BitManager::Write(byte value, std::optional<size_t> n_bits, std::optional<s
     {
         *n_bits = 8;
     }
-    if (cursor_write + *n_bits > n_data_bits)
+    if (cursor_write + *n_bits > data.size() * 8)
     {
         data.push_back(0);
     }

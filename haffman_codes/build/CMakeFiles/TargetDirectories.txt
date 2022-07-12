@@ -1,3 +1,0 @@
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/edit_cache.dir
-/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/haffman_codes.dir

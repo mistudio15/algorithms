@@ -28,7 +28,7 @@ public:
     bool Read(byte &value) override;
 private:
     std::vector<byte> data;
-    size_t cursor;
+    size_t            cursor;
 };
 
 class OutputStream : public IOutputStream
@@ -39,5 +39,5 @@ public:
     std::vector<byte> GetData() const { return data; }
 private:
     std::vector<byte> data;
-    size_t cursor;
+    size_t            cursor;
 };

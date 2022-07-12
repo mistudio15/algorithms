@@ -1,10 +1,13 @@
 #include <iostream>
 #include <bitset>
 #include <string>
+#include <fstream>
 
 #include "stream.h"
 #include "bit_manager.h"
 #include "data_manager.h"
+
+#define ERROR -1
 
 void Encode(IInputStream &original, IOutputStream &compressed)
 {
@@ -12,13 +15,16 @@ void Encode(IInputStream &original, IOutputStream &compressed)
     byte value;
     while (original.Read(value))
     {
-        std::cout << std::bitset<8>(value) << " | ";
         encoder.AddData(value);
     }
-    std::vector<byte> vecRes = encoder.GetProcessedData();
-    for (byte val : vecRes)
+    std::vector<byte> vecCompressed = encoder.GetProcessedData();
+    if (!vecCompressed.size())
     {
-        compressed.Write(val);
+        return;
+    }
+    for (byte byte_ : vecCompressed)
+    {
+        compressed.Write(byte_);
     }
 }
 
@@ -30,45 +36,50 @@ void Decode(IInputStream &compressed, IOutputStream &original)
     {
         decoder.AddData(value);
     }
-    std::vector<byte> vecRes = decoder.GetProcessedData();
-    for (byte val : vecRes)
+    std::vector<byte> vecOriginal = decoder.GetProcessedData();
+    if (!vecOriginal.size())
     {
-        original.Write(val);
+        return;
+    }
+    for (byte byte_ : vecOriginal)
+    {
+        original.Write(byte_);
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::string str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
-    std::vector<byte> vecOriginal(str.begin(), str.end());
+    std::ifstream textFile("../" + std::string(argv[1]));
+    if (!textFile)
+    {
+        return ERROR;
+    }
+    std::vector<byte> vecOriginal;
+    char sym;
+    while (textFile.get(sym))
+    {
+        vecOriginal.push_back(static_cast<byte>(sym));
+    }
+    textFile.close();
 
     InputStream original(vecOriginal);
-    std::cout << "LEN1 = " << str.size() << std::endl;
+    std::cout << "Original size = " << vecOriginal.size() << " byte" << std::endl;
+
     OutputStream compressed;
+    // сжатие
     Encode(original, compressed);
-    std::vector<byte> vec = compressed.GetData();
-    std::cout << "LEN2 = " << vec.size() << std::endl;
-    for (byte val : vec)
-    {
-        std::cout << std::bitset<8>(val) << " | ";
-    }
-    std::cout << std::endl;
+
+    std::vector<byte> vecCompressed = compressed.GetData();
+    std::cout << "Compressed size = " << vecCompressed.size() << " byte" << std::endl;
+    std::cout << "Compressio ratio = " << static_cast<float>(vecOriginal.size()) / vecCompressed.size() << " byte" << std::endl;
 
 
     InputStream compressedCopy(compressed.GetData());
-    OutputStream originalCopy;
-    Decode(compressedCopy, originalCopy);
-    std::vector<byte> vecCopy = originalCopy.GetData();
+    OutputStream originalRestored;
+    // распаковка
+    Decode(compressedCopy, originalRestored);
+    std::vector<byte> vecRestored = originalRestored.GetData();
 
-
-    std::cout << "Decoded string : "; 
-    for (byte val : vecCopy)
-    {
-        std::cout << val;
-    }
-    std::cout << std::endl;
-
-    std::cout << "Matched : " << (vecOriginal == vecCopy ? "Yes" : "No") << std::endl; 
+    std::cout << "Matched : " << (vecOriginal == vecRestored ? "Yes" : "No") << std::endl; 
     return 0;
 }

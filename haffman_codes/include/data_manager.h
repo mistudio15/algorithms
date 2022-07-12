@@ -30,11 +30,17 @@ class DataManager
 public:
     virtual std::vector<byte> GetProcessedData() = 0;
 
+    ~DataManager();
+
     void AddData(byte val);
     void AddData(std::vector<byte> const &vec);
 protected:
-    virtual void BuildTree() = 0;
+    Node *root = nullptr;
     std::vector<byte> data;
+    
+    virtual void BuildTree() = 0;
+private:
+    void postOrder(Node *node, void (*f) (Node *node));
 };
 
 class Encoder : public DataManager
@@ -42,17 +48,17 @@ class Encoder : public DataManager
 public:
     std::vector<byte> GetProcessedData() override;
 private:
-    Node *root = nullptr;
-    BitManager bitDirector;
-    std::map<byte, size_t> tableFreq;
+    BitManager                        bitDirector;
+    std::map<byte, size_t>            tableFreq;
     std::map<byte, std::vector<byte>> tableCodes;
 
     void CreateTableFrequency();
     void BuildTree() override;
-    void CreateTableCodes();
+
 
     // составление таблицы кодов и запись сжатого дерева
-    void PreOrder(Node *node, std::vector<byte> &vecCodes);
+    void CreateTableCodes();
+    void PostOrder(Node *node, std::vector<byte> &vecCodes);
 
     void WritePowerAlphabet();
     void WriteCompressedData();
@@ -66,11 +72,10 @@ class Decoder : public DataManager
 public:
     std::vector<byte> GetProcessedData() override;
 private:
-    Node *root = nullptr;
-    BitManager bitDirector;
-    std::vector<byte> decodedData;
-    byte powerAlphabet;
-    size_t nBitsData;
+    BitManager         bitDirector;
+    std::vector<byte>  decodedData;
+    byte               powerAlphabet;
+    size_t             nBitsData;
 
     void BuildTree() override;
     void DecodeData();

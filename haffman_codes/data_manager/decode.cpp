@@ -1,124 +1,68 @@
 #include <iostream>
-#include <queue>
+#include <stack>
+#include <stack>
 
 #include "data_manager.h"
 
-std::vector<byte> Encoder::GetProcessedData()
+std::vector<byte> Decoder::GetProcessedData()
 {
     if (data.size() == 0)
     {
         return {};
     }
-    CreateTableFrequency();
-    WritePowerAlphabet();
-    // запись 0000 во 2-й байт (для WriteLastBitsData())
-    bitDirector.Write(0, 4, 8); 
-
-
+    for (byte byte_ : data)
+    {
+        bitDirector.Write(byte_);
+    }
+    bitDirector.Read(powerAlphabet);
+    byte nSignificBits;
+    bitDirector.Read(nSignificBits, 4);
     BuildTree();
-    CreateTableCodes();
+    nBitsData = bitDirector.GetLenBitSequence() - bitDirector.GetCursorRead() - (8 - nSignificBits);
+    DecodeData();
+    return decodedData;
+}
 
-    for (auto &[sym, vec] : tableCodes)
+void Decoder::BuildTree()
+{
+    size_t cPowerAlph = powerAlphabet;
+    std::stack<Node *> stackNodes;
+    byte move;
+    byte sym;
+    while (cPowerAlph > 0 || stackNodes.size() != 1)
     {
-        std::cout << sym << " : ";
-        for (byte val : vec)
+        bitDirector.Read(move, 1);
+        if (move == 1)
         {
-            std::cout << static_cast<int>(val);
+            bitDirector.Read(sym, 8);
+            stackNodes.push(new Node(sym));
+            --cPowerAlph;
         }
-        std::cout << std::endl;
-    }
-
-    WriteCompressedData();
-    WriteLastBitsData();
-
-    return bitDirector.GetData();
-}
-
-void Encoder::CreateTableFrequency()
-{
-    for (byte sym : data)
-    {
-        ++tableFreq[sym];
-    }
-}
-
-
-void Encoder::BuildTree()
-{
-    std::priority_queue<std::pair<size_t, Node *>, std::vector<std::pair<size_t, Node *>>, std::greater<std::pair<size_t, Node *>>> queueNodes; 
-    for (auto &[sym, freq] : tableFreq)
-    {
-        Node *temp = new Node(sym, freq);
-        queueNodes.push(std::make_pair(temp->freq, temp));
-    }
-    while (queueNodes.size() >= 2)
-    {
-        auto leftPair = queueNodes.top();
-        queueNodes.pop();
-
-        auto rightPair = queueNodes.top();
-        queueNodes.pop();
-
-        Node *mergeNode = new Node(leftPair.second, rightPair.second);
-        queueNodes.push(std::make_pair(mergeNode->freq, mergeNode));
-    }
-
-    root = queueNodes.top().second;
-}
-
-void Encoder::PreOrder(Node *node, std::vector<byte> &vecCodes)
-{
-    if (node->left)
-    {
-        vecCodes.push_back(0);
-        PreOrder(node->left, vecCodes);
-    }
-    if (node->right)
-    {
-        vecCodes.push_back(1);
-        PreOrder(node->right, vecCodes);
-    }
-    if (!node->left && !node->right)
-    {
-        tableCodes[node->value] = vecCodes;
-        vecCodes.pop_back();
-        bitDirector.Write(1, 1);
-        bitDirector.Write(node->value, 8);
-    }
-    else
-    {
-        vecCodes.pop_back();
-        bitDirector.Write(0, 1);
-    }
-}
-
-void Encoder::CreateTableCodes()
-{
-    std::vector<byte> vecCodes;
-    PreOrder(root, vecCodes);
-}
-
-void Encoder::WritePowerAlphabet()
-{
-    bitDirector.Write(static_cast<byte>(tableFreq.size()), 8, 0);
-}
-
-void Encoder::WriteCompressedData()
-{
-    for (byte sym : data)
-    {
-        // std::cout << "sym {" << sym << "} = ";
-        for (byte bit : tableCodes[sym])
+        else if (move == 0)
         {
-            // std::cout << static_cast<int>(bit) << " ";
-            bitDirector.Write(bit, 1, bitDirector.GetLenBitSequence());
+            Node *rightNode = stackNodes.top();
+            stackNodes.pop();
+            Node *leftNode = stackNodes.top();
+            stackNodes.pop();
+            Node *mergeNode = new Node(leftNode, rightNode);
+            stackNodes.push(mergeNode); 
         }
-        // std::cout << std::endl;
     }
+    root = stackNodes.top();
 }
 
-void Encoder::WriteLastBitsData()
+void Decoder::DecodeData()
 {
-    byte nSignificBits = bitDirector.GetLenBitSequence() % 8;
-    bitDirector.Write(nSignificBits, 4, 8);
+    byte code;
+    Node *tempNode = root;
+    for (size_t i = 0; i < nBitsData; ++i)
+    {
+        bitDirector.Read(code, 1);
+        tempNode = (code == 1 ? tempNode->right : tempNode->left);
+        if (!tempNode->left && !tempNode->right)
+        {
+            decodedData.push_back(tempNode->value);
+            tempNode = root;
+        }
+    }
 }

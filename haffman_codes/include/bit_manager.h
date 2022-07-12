@@ -15,8 +15,10 @@ public:
 
     bool Write(byte value, std::optional<size_t> n_bits = std::nullopt, std::optional<size_t> index_start = std::nullopt);
 
-    size_t GetLenBitSequence() { return n_data_bits; }
-    std::vector<byte> GetData() { return data; }
+    size_t GetLenBitSequence() const { return n_data_bits; }
+    std::vector<byte> GetData() const { return data; }
+    size_t GetCursorRead() const { return cursor_read; }
+    size_t GetCursorWrite() const { return cursor_write; }
     // bool setCursor(size_t index);
 private:
     std::vector<byte> data;

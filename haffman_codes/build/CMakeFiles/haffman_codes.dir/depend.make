@@ -4,10 +4,16 @@
 CMakeFiles/haffman_codes.dir/bit_manager/bit_manager.cpp.o: ../include/bit_manager.h
 CMakeFiles/haffman_codes.dir/bit_manager/bit_manager.cpp.o: ../bit_manager/bit_manager.cpp
 
+CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.o: ../include/bit_manager.h
+CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.o: ../include/data_manager.h
+CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.o: ../data_manager/data_manager.cpp
+
 CMakeFiles/haffman_codes.dir/data_manager/decode.cpp.o: ../include/bit_manager.h
 CMakeFiles/haffman_codes.dir/data_manager/decode.cpp.o: ../include/data_manager.h
 CMakeFiles/haffman_codes.dir/data_manager/decode.cpp.o: ../data_manager/decode.cpp
 
+CMakeFiles/haffman_codes.dir/data_manager/encode.cpp.o: ../include/bit_manager.h
+CMakeFiles/haffman_codes.dir/data_manager/encode.cpp.o: ../include/data_manager.h
 CMakeFiles/haffman_codes.dir/data_manager/encode.cpp.o: ../data_manager/encode.cpp
 
 CMakeFiles/haffman_codes.dir/main.cpp.o: ../include/bit_manager.h

@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/haffman_codes.dir/bit_manager/bit_manager.cpp.o"
+  "CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.o"
   "CMakeFiles/haffman_codes.dir/data_manager/decode.cpp.o"
   "CMakeFiles/haffman_codes.dir/data_manager/encode.cpp.o"
   "CMakeFiles/haffman_codes.dir/main.cpp.o"

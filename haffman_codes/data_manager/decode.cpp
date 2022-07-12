@@ -3,18 +3,6 @@
 
 #include "data_manager.h"
 
-
-void DataManager::AddData(byte val)
-{
-    data.push_back(val);
-}
-
-void DataManager::AddData(std::vector<byte> const &vec)
-{
-    int size = data.size();
-    std::copy(vec.begin(), vec.end(), data.begin() + size);
-}
-
 std::vector<byte> Encoder::GetProcessedData()
 {
     if (data.size() == 0)
@@ -22,15 +10,6 @@ std::vector<byte> Encoder::GetProcessedData()
         return {};
     }
     CreateTableFrequency();
-
-    //  отладка
-    for (auto &[sym, freq] : tableFreq)
-    {
-        std::cout << "(" << sym << ", " << freq << "), ";
-    }
-    std::cout << std::endl;
-    // конец
-
     WritePowerAlphabet();
     // запись 0000 во 2-й байт (для WriteLastBitsData())
     bitDirector.Write(0, 4, 8); 
@@ -128,13 +107,13 @@ void Encoder::WriteCompressedData()
 {
     for (byte sym : data)
     {
-        std::cout << "sym {" << sym << "} = ";
+        // std::cout << "sym {" << sym << "} = ";
         for (byte bit : tableCodes[sym])
         {
-            std::cout << static_cast<int>(bit) << " ";
+            // std::cout << static_cast<int>(bit) << " ";
             bitDirector.Write(bit, 1, bitDirector.GetLenBitSequence());
         }
-        std::cout << std::endl;
+        // std::cout << std::endl;
     }
 }
 

@@ -23,7 +23,7 @@ public:
 class InputStream : public IInputStream
 {
 public:
-    explicit InputStream(std::vector<byte> _data) : data(_data), cursor(0) {}
+    explicit InputStream(std::vector<byte> const &_data) : data(_data), cursor(0) {}
     explicit InputStream(std::string _data) : data(StringToVector(_data)), cursor(0) {}
     bool Read(byte &value) override;
 private:

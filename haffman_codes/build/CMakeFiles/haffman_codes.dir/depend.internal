@@ -4,11 +4,17 @@
 CMakeFiles/haffman_codes.dir/bit_manager/bit_manager.cpp.o
  ../include/bit_manager.h
  /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager/bit_manager.cpp
+CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.o
+ ../include/bit_manager.h
+ ../include/data_manager.h
+ /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/data_manager.cpp
 CMakeFiles/haffman_codes.dir/data_manager/decode.cpp.o
  ../include/bit_manager.h
  ../include/data_manager.h
  /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/decode.cpp
 CMakeFiles/haffman_codes.dir/data_manager/encode.cpp.o
+ ../include/bit_manager.h
+ ../include/data_manager.h
  /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/encode.cpp
 CMakeFiles/haffman_codes.dir/main.cpp.o
  ../include/bit_manager.h

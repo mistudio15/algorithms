@@ -150,6 +150,33 @@ bit_manager/bit_manager.cpp.s:
 	$(MAKE) -f CMakeFiles/haffman_codes.dir/build.make CMakeFiles/haffman_codes.dir/bit_manager/bit_manager.cpp.s
 .PHONY : bit_manager/bit_manager.cpp.s
 
+data_manager/data_manager.o: data_manager/data_manager.cpp.o
+
+.PHONY : data_manager/data_manager.o
+
+# target to build an object file
+data_manager/data_manager.cpp.o:
+	$(MAKE) -f CMakeFiles/haffman_codes.dir/build.make CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.o
+.PHONY : data_manager/data_manager.cpp.o
+
+data_manager/data_manager.i: data_manager/data_manager.cpp.i
+
+.PHONY : data_manager/data_manager.i
+
+# target to preprocess a source file
+data_manager/data_manager.cpp.i:
+	$(MAKE) -f CMakeFiles/haffman_codes.dir/build.make CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.i
+.PHONY : data_manager/data_manager.cpp.i
+
+data_manager/data_manager.s: data_manager/data_manager.cpp.s
+
+.PHONY : data_manager/data_manager.s
+
+# target to generate assembly for a file
+data_manager/data_manager.cpp.s:
+	$(MAKE) -f CMakeFiles/haffman_codes.dir/build.make CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.s
+.PHONY : data_manager/data_manager.cpp.s
+
 data_manager/decode.o: data_manager/decode.cpp.o
 
 .PHONY : data_manager/decode.o
@@ -270,6 +297,9 @@ help:
 	@echo "... bit_manager/bit_manager.o"
 	@echo "... bit_manager/bit_manager.i"
 	@echo "... bit_manager/bit_manager.s"
+	@echo "... data_manager/data_manager.o"
+	@echo "... data_manager/data_manager.i"
+	@echo "... data_manager/data_manager.s"
 	@echo "... data_manager/decode.o"
 	@echo "... data_manager/decode.i"
 	@echo "... data_manager/decode.s"

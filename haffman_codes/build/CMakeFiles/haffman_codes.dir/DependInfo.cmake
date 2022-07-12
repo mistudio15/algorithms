@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/bit_manager/bit_manager.cpp" "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/haffman_codes.dir/bit_manager/bit_manager.cpp.o"
+  "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/data_manager.cpp" "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/haffman_codes.dir/data_manager/data_manager.cpp.o"
   "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/decode.cpp" "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/haffman_codes.dir/data_manager/decode.cpp.o"
   "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/encode.cpp" "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/haffman_codes.dir/data_manager/encode.cpp.o"
   "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/main.cpp" "/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles/haffman_codes.dir/main.cpp.o"

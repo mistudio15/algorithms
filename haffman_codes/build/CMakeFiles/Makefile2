@@ -74,12 +74,12 @@ clean: CMakeFiles/haffman_codes.dir/clean
 CMakeFiles/haffman_codes.dir/all:
 	$(MAKE) -f CMakeFiles/haffman_codes.dir/build.make CMakeFiles/haffman_codes.dir/depend
 	$(MAKE) -f CMakeFiles/haffman_codes.dir/build.make CMakeFiles/haffman_codes.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target haffman_codes"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target haffman_codes"
 .PHONY : CMakeFiles/haffman_codes.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/haffman_codes.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/haffman_codes.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/build/CMakeFiles 0
 .PHONY : CMakeFiles/haffman_codes.dir/rule

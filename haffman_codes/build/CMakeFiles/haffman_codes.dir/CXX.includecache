@@ -17,6 +17,8 @@ vector
 -
 map
 -
+utility
+-
 bit_manager.h
 ../include/bit_manager.h
 
@@ -27,6 +29,14 @@ string
 -
 cstdio
 -
+
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/decode.cpp
+iostream
+-
+queue
+-
+data_manager.h
+/mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/data_manager/data_manager.h
 
 /mnt/c/МГТУ/_Технопарк/Алгоритмы/code_Alg/dz/push_git/haffman_codes/main.cpp
 iostream
